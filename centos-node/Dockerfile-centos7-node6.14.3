@@ -1,0 +1,27 @@
+FROM jiar/centos-systemctl:7
+
+
+LABEL maintainer="Jiar <jiar.world@gmail.com>"
+
+##### nvm、node #####
+
+RUN mkdir -p /usr/local/nvm
+
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 6.14.3
+
+# Downloading nvm as script to '/usr/local/nvm'
+RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash \
+    && source $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+# npm depended
+RUN yum install -y make gcc*
+
+
+CMD ["/usr/sbin/init"]
