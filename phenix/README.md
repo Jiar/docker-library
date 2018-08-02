@@ -10,24 +10,26 @@
 #### 说明
 镜像内置三个系统：博客系统服务器(server)、博客系统前端界面(front)、博客系统后台管理界面(admin)，以及一个数据库(mariadb)。
 
-server路径：/var/www/serve/phenix_server
-front路径：/var/www/html/phenix_front
-admin路径：/var/www/html/phenix_admin
+##### 路径
+- server：/var/www/serve/phenix_server
+- front：/var/www/html/phenix_front
+- admin：/var/www/html/phenix_admin
 
-mariadb端口：3306
-server端口：8060
-front端口：8061
-admin端口：8062
+##### 端口
+- mariadb：3306
+- server：8060
+- front：8061
+- admin：8062
 
-mariadb数据库数据路径：/var/lib/mysql，
+mariadb数据库数据路径：`/var/lib/mysql`，
 你需要映射到一个host上的路径来保存数据，并且确保路径存在切有读写权限（目前发现在mac上无法使用，推测是mac的权限问题，暂时没有找到好的解决方案）。
 
-ARG以及ENV：
-DB_CONFIG_DATABASE：数据库名字
-DB_CONFIG_USER：数据库帐号
-DB_CONFIG_PASSWORD：数据库密码
-JWT_CONFIG_SECRET：JWT密钥，默认phenix_secret
-JWT_CONFIG_EXPRISESIN：JWT失效时长，默认604800(为7天失效时间7*24*60*60)
+##### ARG以及ENV：
+- DB_CONFIG_DATABASE：数据库名字
+- DB_CONFIG_USER：数据库帐号
+- DB_CONFIG_PASSWORD：数据库密码
+- JWT_CONFIG_SECRET：JWT密钥，默认phenix_secret
+- JWT_CONFIG_EXPRISESIN：JWT失效时长，默认604800(为7天失效时间7*24*60*60)
 
 #### 使用方式
 
