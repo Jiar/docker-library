@@ -1,0 +1,25 @@
+FROM jiar/centos-systemctl:7
+
+
+LABEL maintainer="Jiar <jiar.world@gmail.com>"
+LABEL description="python"
+
+# centOS自带python2，但是没有附带pip，通过`yum install -y python-pip`即可安装python2版本的pip，
+# 但是使用`easy_install-3.4 pip`安装pip，会使得pip和pip3都指向python3的版本，
+# 所以需要将`yum install -y python-pip`命令放在`easy_install-3.4 pip`命令下方，可以将pip重置回来，
+# 如此一来，使得python指向python2，pip指向pip2
+
+RUN yum install -y epel-release \
+    && yum install -y python34-setuptools \
+    && easy_install-3.4 pip \
+    && yum install -y python-pip \
+    && rm -rf /etc/supervisor \
+    && mkdir -p /etc/supervisor/conf.d \
+    && pip2 install supervisor
+
+COPY /etc/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+
+RUN chmod 644 /etc/supervisor/supervisord.conf
+
+
+CMD ["/usr/sbin/init"]

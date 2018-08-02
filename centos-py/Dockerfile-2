@@ -1,0 +1,20 @@
+FROM jiar/centos-systemctl:7
+
+
+LABEL maintainer="Jiar <jiar.world@gmail.com>"
+LABEL description="python"
+
+# centOS自带python2，但是没有附带pip，通过`yum install -y python-pip`即可安装python2版本的pip。
+
+RUN yum install -y epel-release \
+    && yum install -y python-pip \
+    && rm -rf /etc/supervisor \
+    && mkdir -p /etc/supervisor/conf.d \
+    && pip install supervisor
+
+COPY /etc/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+
+RUN chmod 644 /etc/supervisor/supervisord.conf
+
+
+CMD ["/usr/sbin/init"]
