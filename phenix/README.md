@@ -82,5 +82,6 @@ node /var/www/serve/phenix_server/createAdmin.js "Admin_User" "Admin_Password" "
 ```
 
 #### 升级版本
-更新版本的时候，如果数据库路径不变，且数据库路径下有完成的数据，则不需要执行第三、四、五步骤，执行`systemctl enable mariadb`即可。
+更新版本的时候，如果数据库路径不变，且数据库路径下有完成的数据，则不需要执行第三、四、五步骤。
+执行`systemctl start mariadb`、`systemctl enable mariadb`以及第六步骤即可。
 
