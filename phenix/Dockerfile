@@ -1,7 +1,7 @@
 FROM jiar/centos-systemctl:7
 
 
-LABEL maintainer="Jiar <jiar.world@gmail.com>"
+LABEL maintainer="Jiar <iiimjiar@gmail.com>"
 LABEL description="Docker container for phenix Project"
 
 
@@ -76,6 +76,8 @@ RUN rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos
     && yum install -y nginx
 
 COPY /etc/nginx /etc/nginx
+RUN mkdir -p /etc/nginx/proxy_temp
+RUN chmod 766 /etc/nginx/proxy_temp
 
 
 ##### serve、front、admin #####
