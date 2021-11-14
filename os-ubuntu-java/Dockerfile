@@ -3,8 +3,15 @@ FROM ubuntu:20.04
 LABEL maintainer="Jiar <iiimjiar@gmail.com>"
 LABEL description="ubuntu deploy java"
 
-RUN apt-get update -y \
-  && apt-get install -y software-properties-common \
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update -y
+
+# time
+RUN apt-get install -y systemd
+
+# java
+RUN apt-get install -y software-properties-common \
   && add-apt-repository ppa:openjdk-r/ppa \
   && apt-get install -y openjdk-8-jdk \
   && rm -rf /var/lib/apt/lists/*
